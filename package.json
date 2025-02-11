@@ -1,0 +1,41 @@
+{
+  "name": "@netflix/eslint-plugin-x-element",
+  "description": "An eslint plugin for x-element.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "github:Netflix/eslint-plugin-x-element",
+  "type": "module",
+  "exports": {
+    "./index.js": "./index.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "sync": "cd etc && ./sync.sh && cd ..",
+    "lint": "eslint --max-warnings=0 .",
+    "lint-fix": "eslint --fix .",
+    "test": "node --test test.js",
+    "bump": "./bump.sh"
+  },
+  "files": [
+    "/index.js",
+    "/no-invalid-html.js",
+    "/vendor"
+  ],
+  "devDependencies": {
+    "@netflix/eslint-config": "3.0.0",
+    "eslint": "9.20.0"
+  },
+  "engines": {
+    "node": "22.11.0",
+    "npm": "10.9.0"
+  },
+  "contributors": [
+    {
+      "name": "Andrew Seier",
+      "email": "aseier@netflix.com"
+    }
+  ]
+}
