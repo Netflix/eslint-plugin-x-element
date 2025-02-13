@@ -1,6 +1,6 @@
 {
   "name": "@netflix/eslint-plugin-x-element",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "exports": {
     "./index.js": "./index.js"
   },
