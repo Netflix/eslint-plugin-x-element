@@ -6,7 +6,6 @@
   },
   "include": [
     "./index.js",
-    "./no-invalid-html.js",
-    "./vendor/x-parser.js"
+    "./no-invalid-html.js"
   ]
 }

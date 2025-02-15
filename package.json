@@ -13,7 +13,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "sync": "cd etc && ./sync.sh && cd ..",
     "lint": "eslint --max-warnings=0 .",
     "lint-fix": "eslint --fix .",
     "test": "node --test test.js",
@@ -21,9 +20,11 @@
   },
   "files": [
     "/index.js",
-    "/no-invalid-html.js",
-    "/vendor"
+    "/no-invalid-html.js"
   ],
+  "dependencies": {
+    "@netflix/x-element": "2.0.0-rc.3"
+  },
   "devDependencies": {
     "@netflix/eslint-config": "3.0.0",
     "eslint": "9.20.0"

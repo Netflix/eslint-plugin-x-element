@@ -12,6 +12,4 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run lint
-      - run: npm run sync
-      - run: git diff --exit-code
       - run: npm test
