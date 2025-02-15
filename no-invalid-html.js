@@ -1,4 +1,74 @@
-import { errorContextKey, validate } from './vendor/x-parser.js';
+import { XParser } from '@netflix/x-element/x-parser.js';
+
+class MockWindow {
+  static #getMockNode = () => {
+    return {
+      appendChild() {/* Do nothing. */},
+      textContent: '',
+    };
+  };
+  static #getMockCommentNode = () => {
+    return { ...MockWindow.#getMockNode() };
+  };
+  static #getMockTextNode = () => {
+    return { ...MockWindow.#getMockNode() };
+  };
+  static #getMockElement = () => {
+    return {
+      ...MockWindow.#getMockNode(),
+      __attributes: {},
+      setAttribute(name, value) { this.__attributes[name] = value; },
+      hasAttribute(name) { return Reflect.has(this.__attributes, name); },
+      append() {/* Do nothing. */},
+      cloneNode() { return MockWindow.#getMockElement(); },
+    };
+  };
+  static #getMockDocumentFragment = () => {
+    return { ...MockWindow.#getMockElement() };
+  };
+  static #getMockTemplate = () => {
+    return {
+      ...MockWindow.#getMockElement(),
+      content: MockWindow.#getMockDocumentFragment(),
+    };
+  };
+
+  static get console() {
+    return { warn: () => {/* Do nothing. */} };
+  }
+
+  static get document() {
+    return {
+      createDocumentFragment() {
+        return MockWindow.#getMockDocumentFragment();
+      },
+      createElementNS() {
+        return MockWindow.#getMockElement();
+      },
+      createElement(localName) {
+        return localName === 'template'
+          ? MockWindow.#getMockTemplate()
+          : MockWindow.#getMockElement();
+      },
+      createTextNode() {
+        return MockWindow.#getMockTextNode();
+      },
+      createComment() {
+        return MockWindow.#getMockCommentNode();
+      },
+    };
+  }
+}
+const validator = new XParser({ window: MockWindow });
+const onBoolean = () => {};
+const onDefined = () => {};
+const onAttribute = () => {};
+const onProperty = () => {};
+const onContent = () => {};
+const onText = () => {};
+const validate = strings => {
+  validator.parse(strings, onBoolean, onDefined, onAttribute, onProperty, onContent, onText);
+};
 
 // Attempts to put a squiggle beneath the whole _line_ which is problematic.
 const getLoc = (node, quasis, context) => {
@@ -54,7 +124,7 @@ const validateTaggedTemplateExpression = (context, node) => {
         context.report({
           node,
           message: format(error),
-          loc: getLoc(node, quasis, error[errorContextKey]),
+          loc: getLoc(node, quasis, XParser.getErrorContext(error)),
         });
       }
     }

@@ -1,8 +1,0 @@
-{
-  "name": "vendor",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@netflix/x-element": "2.0.0-rc.2"
-  }
-}
