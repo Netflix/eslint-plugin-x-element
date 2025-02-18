@@ -23,15 +23,15 @@
     "/no-invalid-html.js"
   ],
   "dependencies": {
-    "@netflix/x-element": "2.0.0-rc.4"
+    "@netflix/x-element": "2.0.0-rc.6"
   },
   "devDependencies": {
     "@netflix/eslint-config": "3.0.0",
     "eslint": "9.20.0"
   },
   "engines": {
-    "node": "22.11.0",
-    "npm": "10.9.0"
+    "node": ">=22.14",
+    "npm": ">=10.9"
   },
   "contributors": [
     {
