@@ -1,23 +1,25 @@
 # eslint-plugin-x-element
 
-An eslint plugin for x-element.
+An [ESLint] plugin for [x-element].
 
 ## Explainer
 
-The [x-element] base class comes with a built-in templating engine. By design,
-this engine is _unforgiving_; which affords performance and complexity wins.
+The `x-element` library ships with a simple, efficient template engine. By design, 
+its supported syntax is strict and _unforgiving_. This approach affords improved 
+performance and minimizes template complexity.
 
-This eslint plugin allows developers to get contextualized linting hints in an
-IDE without needing to actually execute their templates in a browser.
+This plugin improves the feedback loop while using the `x-element` template syntax
+by detecting issues through static analysis and saving the need to test changes
+in the browser one-by-one.
 
 ## Installation & Usage
 
 ```
-npm install --save-dev eslint-plugin-x-element
+npm install --save-dev @netflix/eslint-plugin-x-element
 ```
 
 ```js
-import XElement from 'eslint-plugin-x-element/index.js';
+import XElement from '@netflix/eslint-plugin-x-element';
 
 export default [
   /* … */
@@ -30,4 +32,5 @@ export default [
 ];
 ```
 
+[ESLint]: https://eslint.org
 [x-element]: https://github.com/Netflix/x-element
