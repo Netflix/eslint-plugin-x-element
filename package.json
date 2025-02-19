@@ -23,7 +23,7 @@
     "/no-invalid-html.js"
   ],
   "dependencies": {
-    "@netflix/x-element": "2.0.0-rc.6"
+    "@netflix/x-element": "2.0.0-rc.7"
   },
   "devDependencies": {
     "@netflix/eslint-config": "3.0.0",
@@ -37,6 +37,10 @@
     {
       "name": "Andrew Seier",
       "email": "aseier@netflix.com"
+    },
+    {
+      "name": "Casey Klebba",
+      "email": "cklebba@netflix.com"
     }
   ]
 }
