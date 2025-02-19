@@ -1,7 +1,7 @@
 {
   "name": "@netflix/eslint-plugin-x-element",
   "description": "An eslint plugin for x-element.",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "license": "Apache-2.0",
   "repository": "github:Netflix/eslint-plugin-x-element",
   "type": "module",
