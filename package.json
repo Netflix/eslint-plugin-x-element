@@ -5,9 +5,6 @@
   "license": "Apache-2.0",
   "repository": "github:Netflix/eslint-plugin-x-element",
   "type": "module",
-  "exports": {
-    "./index.js": "./index.js"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
