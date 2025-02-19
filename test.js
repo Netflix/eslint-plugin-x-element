@@ -160,7 +160,19 @@ test('no-invalid-html', (/*context*/) => {
         errors: [{ message: /^\[#153\]/ }],
       },
       {
+        code: 'html`<style></style>`',
+        errors: [{ message: /^\[#153\]/ }],
+      },
+      {
+        code: 'html`<canvas></canvas>`',
+        errors: [{ message: /^\[#153\]/ }],
+      },
+      {
         code: 'html`<svg></svg>`',
+        errors: [{ message: /^\[#153\]/ }],
+      },
+      {
+        code: 'html`<math></math>`',
         errors: [{ message: /^\[#153\]/ }],
       },
       {
