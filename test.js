@@ -22,13 +22,14 @@ test('no-invalid-html', (/*context*/) => {
       },
     ],
 
+    // See “code coverage” section of “x-element” / “test-parser.js” test suite.
     invalid: [
       {
         code: 'html`<`',
         errors: [{ message: /^\[#100\]/ }],
       },
       {
-        code: 'html`foo<`',
+        code: 'html`text<`',
         errors: [{ message: /^\[#101\]/ }],
       },
       {
@@ -36,159 +37,112 @@ test('no-invalid-html', (/*context*/) => {
         errors: [{ message: /^\[#102\]/ }],
       },
       {
-        code: 'html`${\'interpolation\'}<`',
+        code: 'const VALUE = 1; html`${VALUE}<`',
         errors: [{ message: /^\[#103\]/ }],
       },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#104\]/ }],
-      // },
       {
-        code: 'html`<div !>`',
-        errors: [{ message: /^\[#105\]/ }],
+        code: 'html`<input !>`',
+        errors: [{ message: /^\[#104\]/ }],
       },
       {
         code: 'html`<div><`',
+        errors: [{ message: /^\[#105\]/ }],
+      },
+      {
+        code: 'html`<div ?boolean="${VALUE}!`',
         errors: [{ message: /^\[#106\]/ }],
       },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#107\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#108\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#109\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#110\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#111\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#112\]/ }],
-      // },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#113\]/ }],
-      // },
+      {
+        code: 'html`<div ??defined="${VALUE}!`',
+        errors: [{ message: /^\[#107\]/ }],
+      },
+      {
+        code: 'html`<div attribute="${VALUE}!`',
+        errors: [{ message: /^\[#108\]/ }],
+      },
+      {
+        code: 'html`<div .property="${VALUE}!`',
+        errors: [{ message: /^\[#109\]/ }],
+      },
       {
         code: 'html`<div></div><`',
-        errors: [{ message: /^\[#114\]/ }],
+        errors: [{ message: /^\[#110\]/ }],
       },
 
+      //////////////////////////////////////////////////////////////////////////
+
       {
-        code: 'html`< div>`',
+        code: 'html`<dIv>`',
         errors: [{ message: /^\[#120\]/ }],
       },
       {
-        code: 'html`<div\t>`',
+        code: 'html`<div	>`',
         errors: [{ message: /^\[#121\]/ }],
       },
-      // TODO: Impossible case?
-      // {
-      //   code: '…',
-      //   errors: [{ message: /^\[#122\]/ }],
-      // },
       {
-        code: 'html`<div>< /div>`',
+        code: 'html`<div foo />`',
+        errors: [{ message: /^\[#122\]/ }],
+      },
+      {
+        code: 'html`<div></ div>`',
         errors: [{ message: /^\[#123\]/ }],
       },
       {
-        code: 'html`<div -foo>`',
+        code: 'html`<div Boolean>`',
         errors: [{ message: /^\[#124\]/ }],
       },
       {
-        code: 'html`<div -foo="bar">`',
+        code: 'html`<div ?Boolean="${VALUE}">`',
         errors: [{ message: /^\[#125\]/ }],
       },
       {
-        code: 'html`<div ?-foo="${\'interpolation\'}">`',
+        code: 'html`<div .Property="${VALUE}">`',
         errors: [{ message: /^\[#126\]/ }],
       },
       {
-        code: 'html`<div ??-foo="${\'interpolation\'}">`',
+        code: 'html`<div attribute="${VALUE}\'>`',
         errors: [{ message: /^\[#127\]/ }],
       },
-      {
-        code: 'html`<div -foo="${\'interpolation\'}">`',
-        errors: [{ message: /^\[#128\]/ }],
-      },
-      {
-        code: 'html`<div ._foo="${\'interpolation\'}">`',
-        errors: [{ message: /^\[#129\]/ }],
-      },
-      {
-        code: 'html`<div foo="${\'interpolation\'}\'>`',
-        errors: [{ message: /^\[#130\]/ }],
-      },
+
+      //////////////////////////////////////////////////////////////////////////
 
       {
-        code: 'html`<![CDATA[x < y]]>`',
+        code: 'html`<![CDATA[<]]>`',
         errors: [{ message: /^\[#140\]/ }],
       },
+
+      //////////////////////////////////////////////////////////////////////////
 
       {
         code: 'html`\\n`',
         errors: [{ message: /^\[#150\]/ }],
       },
       {
-        code: 'html`&ambiguous`',
+        code: 'html`&a`',
         errors: [{ message: /^\[#151\]/ }],
       },
       {
-        code: 'html`<!-->-->`',
+        code: 'html`<!-- -- -->`',
         errors: [{ message: /^\[#152\]/ }],
       },
       {
-        code: 'html`<foo></foo>`',
+        code: 'html`<style>`',
         errors: [{ message: /^\[#153\]/ }],
       },
       {
-        code: 'html`<style></style>`',
-        errors: [{ message: /^\[#153\]/ }],
-      },
-      {
-        code: 'html`<canvas></canvas>`',
-        errors: [{ message: /^\[#153\]/ }],
-      },
-      {
-        code: 'html`<svg></svg>`',
-        errors: [{ message: /^\[#153\]/ }],
-      },
-      {
-        code: 'html`<math></math>`',
-        errors: [{ message: /^\[#153\]/ }],
-      },
-      {
-        code: 'html`<main>`',
+        code: 'html`<div>`',
         errors: [{ message: /^\[#154\]/ }],
       },
       {
-        code: 'html`<main></section>`',
+        code: 'html`<textarea> -- ${VALUE} -- </textarea>`',
         errors: [{ message: /^\[#155\]/ }],
       },
       {
-        code: 'html`<textarea> ${\'interpolation\'} </textarea>`',
+        code: 'html`<template shadowrootmode>`',
         errors: [{ message: /^\[#156\]/ }],
       },
       {
-        code: 'html`<template shadowrootmode="open"></template>`',
+        code: 'html`<template foo="${VALUE}`',
         errors: [{ message: /^\[#157\]/ }],
       },
     ],
