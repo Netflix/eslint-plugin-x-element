@@ -6,14 +6,14 @@ const validate = strings => XParser.parse(strings, onToken);
 // Attempts to put a squiggle beneath the whole _line_ which is problematic.
 const getLoc = (node, quasis, strings, context) => {
   if (context) {
-    const { stringsIndex, stringIndex } = context;
-    const quasi = quasis[stringsIndex];
+    const { index, start } = context;
+    const quasi = quasis[index];
     if (quasi) {
       // Most cases will fall here.
       const startLine = quasi.loc.start.line;
       const startColumn = quasi.loc.start.column;
-      const string = strings[stringsIndex];
-      const stringPrefix = string.slice(0, stringIndex);
+      const string = strings[index];
+      const stringPrefix = string.slice(0, start ?? 0);
       const problemStartLine = stringPrefix.split('\n').length;
       const problemLine = string.split('\n')[problemStartLine - 1];
       const indentationMatch = problemLine.match(/(^ *)[^ ]/);
